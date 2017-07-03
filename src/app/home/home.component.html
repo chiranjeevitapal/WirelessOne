@@ -1,0 +1,81 @@
+<!--h2 class="text-center">{{heading}}</h2-->
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="input-group stylish-input-group">
+            <input class="form-control" type="text" [value]="filterText" [placeholder]="filterPlaceholder" [formControl]="filterInput" />
+            <span class="input-group-addon">
+              <button type="submit" title="Search">
+                  <i class="fa fa-search"></i>
+              </button>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="row top-buffer">
+    <div class="col-lg-3 col-md-6" *ngFor="let lab of labs | filter:{lab_id: filterText, building_id: filterText, location: filterText} : false">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-flask fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">{{lab.lab_id}}</div>
+                        <div>{{lab.building_id}}, {{lab.location}} <i class="fa fa-map-marker"></i></div>
+                    </div>
+                </div>
+            </div>
+            <a href="javascript:void(0)" (click)="fetchBenches(lab._id)">
+                <div class="panel-footer">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-primary btn-circle btn-lg" title="Add Lab" data-toggle="modal" data-target="#labModal"><i class="fa fa-plus"></i></button>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div id="labModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form [formGroup]="labForm" novalidate>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Lab</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="lab_id">Lab Id</label>
+                        <input type="text" class="form-control" formControlName="lab_id" id="lab_id">
+                    </div>
+                    <div class="form-group">
+                        <label for="building_id">Building Id</label>
+                        <input type="text" class="form-control" formControlName="building_id" id="building_id">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" formControlName="location" id="location">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!labForm.valid" (click)="addLab(labForm.value, labForm.valid)">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

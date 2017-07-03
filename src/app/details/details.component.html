@@ -1,0 +1,160 @@
+<div class="row">
+    <div class="col-lg-2">
+        <div class="alert alert-default text-center" role="alert"> <i class="fa fa-flask fa-3x"></i>
+            <h3>{{selectedLab.lab_id}}</h3></div>
+    </div>
+    <div class="col-lg-2">
+        <div class="alert alert-default text-center" role="alert"> <i class="fa fa-building fa-3x"></i>
+            <h3>{{selectedLab.building_id}}</h3></div>
+    </div>
+    <div class="col-lg-2">
+        <div class="alert alert-default text-center" role="alert"> <i class="fa fa-map-marker fa-3x"></i>
+            <h3>{{selectedLab.location}}</h3></div>
+    </div>
+</div>
+<div class="row top-buffer">
+    <div class="col-md-11 col-lg-11">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>Bench#</th>
+                    <th>POC</th>
+                    <th>Technology</th>
+                    <th>Type</th>
+                    <th>Cell ID</th>
+                    <th>RRU O/P</th>
+                    <th>Attenuation</th>
+                    <th>Real time signal</th>
+                    <th>#</th>
+                </tr>
+                <tr *ngFor="let bench of benches; let benchIndex=index;">
+                    <td>{{bench.bench_id}}</td>
+                    <!--input type="text" placeholder="Bench Id" disabled="disabled" value="{{bench.bench_id}}"-->
+                    <td>{{bench.poc}}</td>
+                    <td>{{bench.technology}}</td>
+                    <td>{{bench.type}}</td>
+                    <td>{{bench.cell_id}}</td>
+                    <td>{{bench.rru_output_db}}</td>
+                    <td>{{bench.attenuation_db}}</td>
+                    <td>{{bench.real_time_signal}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm" title="Edit Bench" data-toggle="modal" data-target="#benchModal" (click)="populateBench(bench._id)"><i class="fa fa-pencil"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm" title="Delete Bench" data-toggle="modal" data-target="#confirmModal" (click)="populateBench(bench._id)"><i class="fa fa-trash"></i></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <button type="button" class="btn btn-primary btn-circle btn-lg" title="Add Bench" data-toggle="modal" data-target="#benchModal" (click)="clearBenchForm()"><i class="fa fa-plus"></i></button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="benchModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form [formGroup]="benchForm" novalidate>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 *ngIf="newForm" class="modal-title text-info text-center">Add Bench</h3>
+                    <h3 *ngIf="!newForm" class="modal-title text-info text-center">Update Bench</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group" [ngClass]="{'has-error':!benchForm.controls.bench_id.valid}">
+                                <label for="bench_id">Bench Id</label>
+                                <input type="text" class="form-control" formControlName="bench_id" id="bench_id" placeholder="Bench Id">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group" [ngClass]="{'has-error':!benchForm.controls.poc.valid}">
+                                <label for="poc">POC</label>
+                                <input type="text" class="form-control" formControlName="poc" id="poc" placeholder="POC">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group" [ngClass]="{'has-error':!benchForm.controls.technology.valid}">
+                                <label for="technology">Technology</label>
+                                <input type="text" class="form-control" formControlName="technology" id="technology" placeholder="Technology">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group" [ngClass]="{'has-error':!benchForm.controls.type.valid}">
+                                <label for="type">Type</label>
+                                <input type="text" class="form-control" formControlName="type" id="type" placeholder="Type">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group" [ngClass]="{'has-error':!benchForm.controls.cell_id.valid}">
+                                <label for="cell_id">Cell Id</label>
+                                <input type="text" class="form-control" formControlName="cell_id" id="cell_id" placeholder="Cell Id">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group" [ngClass]="{'has-error':!benchForm.controls.rru_output_db.valid}">
+                                <label for="rru_output_db">RRU O/P (db)</label>
+                                <input type="text" class="form-control" formControlName="rru_output_db" id="rru_output_db" placeholder="RRU O/P (db)">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group" [ngClass]="{'has-error':!benchForm.controls.attenuation_db.valid}">
+                                <label for="attenuation_db">Attenuation(db)</label>
+                                <input type="text" class="form-control" formControlName="attenuation_db" id="attenuation_db" placeholder="Attenuation(db)">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group" [ngClass]="{'has-error':!benchForm.controls.real_time_signal.valid}">
+                                <label for="real_time_signal">Real Time Signal</label>
+                                <input type="text" class="form-control" formControlName="real_time_signal" id="real_time_signal" placeholder="Real Time Signal">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group" [ngClass]="{'has-error':!benchForm.controls.comments.valid}">
+                                <label for="comments">Comments</label>
+                                <input type="text" class="form-control" formControlName="comments" id="comments" placeholder="Real Time Signal">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group" [ngClass]="{'has-error':!benchForm.controls.utilization.valid}">
+                                <label for="utilization">Utilization</label>
+                                <input type="text" class="form-control" formControlName="utilization" id="utilization" placeholder="Utilization">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="form-group" [ngClass]="{'has-error':!benchForm.controls.enabled_date.valid}">
+                                <label for="enabled_date">Enabled Date</label>
+                                <input type="text" class="form-control" formControlName="enabled_date" id="enabled_date" placeholder="Enabled Date">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" *ngIf="newForm" class="btn btn-primary" data-dismiss="modal" [disabled]="!benchForm.valid" (click)="addBench(benchForm.value, benchForm.valid, selectedLab._id)">Add</button>
+                    <button type="button" *ngIf="!newForm" class="btn btn-primary" data-dismiss="modal" [disabled]="!benchForm.valid" (click)="updateBench(benchForm.value, benchForm.valid)">Update</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="confirmModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3>Are you sure?</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-danger" id="delete" (click)="removeBench(selectedBench._id)">Confirm</button>
+                <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

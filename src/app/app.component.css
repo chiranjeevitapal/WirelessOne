@@ -1,0 +1,67 @@
+html, body{
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+span.active {
+  background-color: gray;
+}
+
+
+
+#login-dp{
+    overflow:hidden;
+}
+
+.btn-fb{
+    color: #fff;
+    background-color:#3b5998;
+}
+.btn-fb:hover{
+    color: #fff;
+    background-color:#496ebc
+}
+
+.top-buffer{
+  margin-top:50px;
+}
+
+
+.navbar-default .navbar-brand {
+    color: rgba(255, 255, 255, 1);
+}
+.navbar-default {
+    font-size: 14px;
+    background-color: rgba(2, 143, 204, 1);
+    border-width: 1px;
+    border-radius: 4px;
+}
+.navbar-default .navbar-nav>li>a {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(2, 143, 204, 1);
+}
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(2, 125, 179, 1);
+}
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(2, 125, 179, 1);
+}
+.navbar-default .navbar-toggle {
+    border-color: #027db3;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #027db3;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #027db3;
+}
+.navbar-default .navbar-toggle:hover .icon-bar,
+.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #028fcc;
+}
